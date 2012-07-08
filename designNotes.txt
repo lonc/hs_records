@@ -1,0 +1,15 @@
+Features / Notes :: Home School record keeping
+
+Print and/or screen display w/ chk boxes 
+ - chksheet for teacher of things to watch for
+ - items need to be tied to specific assignments
+
+ - flag for 'materials required' for each assignment with options of:
+ -  'text box' (so I can write what it is that I need)  
+ - "numeric field', so I can select how many days before the assignment the item shows up in my calendar.
+
+Students can check in on-line and enter scores for their assignments
+ - Subject flagged "student update yes/no"
+ - Assignment flagged "student update yes/no"
+ - Score for each assignment can only be entered once by student
+
