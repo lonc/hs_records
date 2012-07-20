@@ -13,3 +13,29 @@ Students can check in on-line and enter scores for their assignments
  - Assignment flagged "student update yes/no"
  - Score for each assignment can only be entered once by student
 
+
+_____________  USE CASES _____________________
+
+1)  Add students
+   Only the students table is impacted
+
+2)  Add Resources
+   Only the resources table is impacted
+
+3) Add subject
+   Name the Subject
+   Select a resource 
+   Select student(s)
+   Select Days (Check boxes)
+   If more than one student is selected, copies of subject are created for each student, each with
+   the same subject_ref_id.  
+
+4) Add assignment
+   Select Subject
+   Select pages
+   ...
+   Create assignment
+   If more than 1 subject is identified with the subject_ref_id, copies of the assignment
+   are created for each student.
+   
+5) 
