@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120716000337) do
+ActiveRecord::Schema.define(:version => 20120808213340) do
 
   create_table "assignments", :force => true do |t|
     t.string   "assignment",        :null => false
@@ -36,12 +36,11 @@ ActiveRecord::Schema.define(:version => 20120716000337) do
   end
 
   create_table "resources", :force => true do |t|
-    t.string   "title",            :null => false
+    t.string   "title",         :null => false
     t.string   "Publisher"
     t.string   "Author"
-    t.string   "publication_date"
-    t.datetime "created_at",       :null => false
-    t.datetime "updated_at",       :null => false
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
     t.integer  "NumberOfPages"
   end
 
@@ -72,8 +71,9 @@ ActiveRecord::Schema.define(:version => 20120716000337) do
     t.binary   "AssignOnWednesday"
     t.binary   "AssignOnThursday"
     t.binary   "AssignOnFriday"
-    t.integer  "resource_id",       :default => 1, :null => false
-    t.integer  "student_id",        :default => 1, :null => false
+    t.integer  "baseid",            :default => 1, :null => false
+    t.integer  "student_id"
+    t.integer  "resource_id"
   end
 
 end

@@ -1,0 +1,38 @@
+<h1>Listing subjects</h1>
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Resource</th>
+    <th>Graded</th>
+    <th>Student Scored</th>
+    <th> M </th>
+    <th> T </th>
+    <th> W </th>
+    <th> Th</th>
+    <th> F </th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @subjects.each do |subject| %>
+  <tr>
+    <td><%= subject.name %></td>
+    <td><%= subject.graded %></td>
+    <td><%= subject.studentupdate %></td>
+    <td><%= subject.AssignOnMonday %></td>
+    <td><%= subject.AssignOnTuesday %></td>
+    <td><%= subject.AssignOnWednesday %></td>
+    <td><%= subject.AssignOnThursday %></td>
+    <td><%= subject.AssignOnFriday %></td>
+    <td><%= link_to 'Show', subject %></td>
+    <td><%= link_to 'Edit', edit_subject_path(subject) %></td>
+    <td><%= link_to 'Destroy', subject, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Subject', new_subject_path %>

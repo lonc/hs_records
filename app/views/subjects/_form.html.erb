@@ -1,0 +1,57 @@
+        <%= form_for(@subject) do |f| %>
+          <% if @subject.errors.any? %>
+            <div id="error_explanation">
+              <h2><%= pluralize(@subject.errors.count, "error") %> prohibited this subject from being saved:</h2>
+        
+              <ul>
+              <% @subject.errors.full_messages.each do |msg| %>
+                <li><%= msg %></li>
+              <% end %>
+              </ul>
+            </div>
+          <% end %>
+        
+          <div class="field">
+            <%= f.label :Subject %><br />
+            <%= f.text_field :name %>
+          </div>
+          <div class="field">
+            <%= f.label :baseid %><br />
+            <%= f.number_field :baseid %>
+          </div>
+          <div class="field">
+            <%= f.label :Resource %><br />
+            <%= select(:subject, :resource_id, @resources.map { |r| [ r.title, r.id ] }, { :prompt => true }) %>
+          </div>
+          <div class="field">
+            <%= f.label :Graded? %><br />
+            <%= f.check_box :graded %>
+          </div>
+          <div class="field">
+            <%= f.label :Student_scored %><br />
+            <%= f.check_box :studentupdate %>
+          </div>
+          <div class="field">
+            <%= f.label  :Monday %><br />
+            <%= f.check_box :AssignOnMonday %>
+          </div>
+          <div class="field">
+            <%= f.label :Tuesday %><br />
+            <%= f.check_box :AssignOnTuesday %>
+          </div>
+          <div class="field">
+            <%= f.label :Wednesday %><br />
+            <%= f.check_box :AssignOnWednesday %>
+          </div>
+          <div class="field">
+            <%= f.label :Thursday %><br />
+            <%= f.check_box :AssignOnThursday %>
+          </div>
+          <div class="field">
+            <%= f.label :Friday %><br />
+            <%= f.check_box :AssignOnFriday %>
+          </div>
+          <div class="actions">
+            <%= f.submit %>
+          </div>
+        <% end %>
