@@ -4,6 +4,11 @@
   <b>Name:</b>
   <%= @subject.name %>
 </p>
+<p>
+  <b>Assignment Day: </b>
+  <%= $day %>
+</p>
+
 
 
 <%= render :partial => "assignments/assignments", :collection => @assignments %>
@@ -18,7 +23,7 @@
     <%= f.text_field :assignment %>
   </div>
   <div class="field">
-    <%= f.label :studentupdate %><br />
+    <%= f.label :student_scored %><br />
     <%= f.check_box :studentupdate %>
   </div>
   <div class="actions">

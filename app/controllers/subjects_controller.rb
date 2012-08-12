@@ -1,6 +1,9 @@
 class SubjectsController < ApplicationController
   # GET /subjects
   # GET /subjects.json
+  $nday = "M"
+  $day = "M"
+
   def index
     @subjects = Subject.all
 
@@ -17,6 +20,96 @@ class SubjectsController < ApplicationController
     @assignments = @subject.assignments.all
     @new_assign = @subject.assignments.build
     @subject_id = @subject.id
+    case $nday
+      when "M" 
+        if @subject.AssignOnMonday?
+          $day = "M"
+          $nday = "T"
+        elsif @subject.AssignOnTuesday?
+          $day = "T"
+          $nday = "W"
+        elsif @subject.AssignOnWednesday?
+          $day = "W"
+          $nday = "H"
+        elsif @subject.AssignOnThursday?
+          $day = "H"
+          $nday = "F"
+        elsif @subject.AssignOnFriday?
+          $day = "F"
+          $nday = "M"
+        end
+      when "T" 
+        if @subject.AssignOnTuesday?
+          $day = "T"
+          $nday = "W"
+        elsif @subject.AssignOnWednesday?
+          $day = "W"
+          $nday = "H"
+        elsif @subject.AssignOnThursday?
+          $day = "H"
+          $nday = "F"
+        elsif @subject.AssignOnFriday?
+          $day = "F"
+          $nday = "M"
+        elsif @subject.AssignOnMonday?
+          $day = "M"
+          $nday = "T"
+        end
+      when "W" 
+        if @subject.AssignOnWednesday?
+          $day = "W"
+          $nday = "H"
+        elsif @subject.AssignOnThursday?
+          $day = "H"
+          $nday = "F"
+        elsif @subject.AssignOnFriday?
+          $day = "F"
+          $nday = "M"
+        elsif @subject.AssignOnMonday?
+          $day = "M"
+          $nday = "T"
+        elsif @subject.AssignOnTuesday?
+          $day = "T"
+          $nday = "W"
+        end
+      when "H" 
+        if @subject.AssignOnThursday?
+          $day = "H"
+          $nday = "F"
+        elsif @subject.AssignOnFriday?
+          $day = "F"
+          $nday = "M"
+        elsif @subject.AssignOnMonday?
+          $day = "M"
+          $nday = "T"
+        elsif @subject.AssignOnTuesday?
+          $day = "T"
+          $nday = "W"
+        elsif @subject.AssignOnWednesday?
+          $day = "W"
+          $nday = "H"
+        end
+      when "F" 
+        if @subject.AssignOnFriday?
+          $day = "F"
+          $nday = "M"
+        elsif @subject.AssignOnMonday?
+          $day = "M"
+          $nday = "T"
+        elsif @subject.AssignOnTuesday?
+          $day = "T"
+          $nday = "W"
+        elsif @subject.AssignOnWednesday?
+          $day = "W"
+          $nday = "H"
+        elsif @subject.AssignOnThursday?
+          $day = "H"
+          $nday = "F"
+        end
+      else
+    end
+
+
 
     respond_to do |format|
       format.html # show.html.erb
@@ -47,14 +140,10 @@ class SubjectsController < ApplicationController
   # POST /subjects.json
   def create
      @subject = Subject.new(params[:subject])
-#     @subject.resource_id = params[:subject][:resource_id]
-#     @subject.student_id = params[:subject][:student_id]
-#     @subject.baseid = params[:subject][:baseid]
-#     @subject.attributes = params[:subject]
 
     respond_to do |format|
       if @subject.save
-        format.html { redirect_to @subject, :notice => 'Subject was successfully created.' }
+        format.html { redirect_to :subjects, :notice => 'Subject was successfully created.' }
         format.json { render :json => @subject, :status => :created, :location => @subject }
       else
         format.html { render :action => "new" }
@@ -89,10 +178,5 @@ class SubjectsController < ApplicationController
       format.html { redirect_to subjects_url }
       format.json { head :no_content }
     end
-  end
-
-  # helper method
-  def id_helper
-    @new_assign.subject_id = @subject.id
   end
 end

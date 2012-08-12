@@ -9,7 +9,7 @@
     <th> M </th>
     <th> T </th>
     <th> W </th>
-    <th> Th</th>
+    <th> H </th>
     <th> F </th>
     <th></th>
     <th></th>
@@ -19,6 +19,7 @@
 <% @subjects.each do |subject| %>
   <tr>
     <td><%= subject.name %></td>
+    <td><%= subject.resource_id %></td>
     <td><%= subject.graded %></td>
     <td><%= subject.studentupdate %></td>
     <td><%= subject.AssignOnMonday %></td>
@@ -26,7 +27,7 @@
     <td><%= subject.AssignOnWednesday %></td>
     <td><%= subject.AssignOnThursday %></td>
     <td><%= subject.AssignOnFriday %></td>
-    <td><%= link_to 'Show', subject %></td>
+    <td><%= link_to 'Add Assignments', subject %></td>
     <td><%= link_to 'Edit', edit_subject_path(subject) %></td>
     <td><%= link_to 'Destroy', subject, :confirm => 'Are you sure?', :method => :delete %></td>
   </tr>

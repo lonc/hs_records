@@ -6,7 +6,7 @@ class StudentsController < ApplicationController
 
     respond_to do |format|
       format.html # index.html.erb
-      ##format.json { render :json => @students }
+      format.json { render :json => @students }
     end
   end
 
@@ -17,7 +17,7 @@ class StudentsController < ApplicationController
 
     respond_to do |format|
       format.html # show.html.erb
-      #format.json { render :json => @student }
+      format.json { render :json => @student }
     end
   end
 
@@ -28,13 +28,25 @@ class StudentsController < ApplicationController
 
     respond_to do |format|
       format.html # new.html.erb
-      #format.json { render :json => @student }
+      format.json { render :json => @student }
     end
   end
 
   # GET /students/1/edit
   def edit
     @student = Student.find(params[:id])
+  end
+
+  # GET /students/1
+  # GET /students/1.json
+  def classes
+    @student = Student.find(params[:id])
+    @subjects = Subject.order("name")
+
+    respond_to do |format|
+      format.html # classes.html.erb
+      format.json { render :json => @student }
+    end
   end
 
   # POST /students
@@ -45,10 +57,10 @@ class StudentsController < ApplicationController
     respond_to do |format|
       if @student.save
         format.html { redirect_to @student, :notice => 'Student was successfully created.' }
-        #format.json { render :json => @student, :status => :created, :location => @student }
+        format.json { render :json => @student, :status => :created, :location => @student }
       else
         format.html { render :action => "new" }
-        #format.json { render :json => @student.errors, :status => :unprocessable_entity }
+        format.json { render :json => @student.errors, :status => :unprocessable_entity }
       end
     end
   end
@@ -90,10 +102,10 @@ class StudentsController < ApplicationController
     respond_to do |format|
       if @student.update_attributes(params[:student])
         format.html { redirect_to @student, :notice => 'Student was successfully updated.' }
-        #format.json { head :no_content }
+        format.json { head :no_content }
       else
         format.html { render :action => "edit" }
-        #format.json { render :json => @student.errors, :status => :unprocessable_entity }
+        format.json { render :json => @student.errors, :status => :unprocessable_entity }
       end
     end
   end
@@ -106,7 +118,7 @@ class StudentsController < ApplicationController
 
     respond_to do |format|
       format.html { redirect_to students_url }
-      #format.json { head :no_content }
+      format.json { head :no_content }
     end
   end
 end
