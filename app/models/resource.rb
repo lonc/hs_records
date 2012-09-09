@@ -1,5 +1,5 @@
 class Resource < ActiveRecord::Base
-   attr_accessible :title, :Publisher, :Author, :publication_date, :NumberOfPages
+   attr_accessible :title, :Publisher, :publication_date, :NumberOfPages, :subject_id
    validates :title, :presence => true
    validates :Publisher, :presence => true
 

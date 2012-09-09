@@ -1,16 +1,28 @@
 HomeSchool::Application.routes.draw do
+
+  match 'students/select_daily', :to => 'students#select_daily'
+  match 'students/daily_list', :to => 'students#daily_list'
+  match 'students/update_assigned', :to => 'students#update_assigned'
+
   resources :notes
 
   resources :assignments
 
   resources :subjects do
+    member do
+      get 'view'
+    end
     resources :assignments, :only => [:create, :index, :new]
   end
 
-  resources :students
+  resources :students do
+    member do
+      get 'select_subjects'
+      post 'select_save'
+    end
+  end
 
   resources :resources
-
 
    # The priority is based upon order of creation:
   # first created -> highest priority.

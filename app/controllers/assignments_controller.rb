@@ -65,7 +65,7 @@ class AssignmentsController < ApplicationController
   # POST /students_assign.json
   def add_assign
 
-    @assign = @suubject.assignment.create(params[:assignment])
+    @assign = @subject.assignment.create(params[:assignment])
 
     respond_to do |format|
       if @assign.save
@@ -79,11 +79,18 @@ class AssignmentsController < ApplicationController
   # PUT /assignments/1.json
   def update
     @assignment = Assignment.find(params[:id])
+    if params.has_key?(:return_subject)
+      @subject = Subject.find(params[:return_subject])
+    end
 
     respond_to do |format|
       if @assignment.update_attributes(params[:assignment])
-        format.html { redirect_to @assignment, :notice => 'Assignment was successfully updated.' }
-        format.json { head :no_content }
+        if @subject
+          format.html { redirect_to @subject, :notice => 'Assignment was successfully updated.' }
+        else
+          format.html { redirect_to @assignment, :notice => 'Assignment was successfully updated.' }
+          format.json { head :no_content }
+        end
       else
         format.html { render :action => "edit" }
         format.json { render :json => @assignment.errors, :status => :unprocessable_entity }
@@ -94,11 +101,18 @@ class AssignmentsController < ApplicationController
   # DELETE /assignments/1
   # DELETE /assignments/1.json
   def destroy
+    if params.has_key?(:return_subject)
+      @subject = Subject.find(params[:return_subject])
+    end
     @assignment = Assignment.find(params[:id])
     @assignment.destroy
 
     respond_to do |format|
-      format.html { redirect_to assignments_url }
+        if @subject
+          format.html { redirect_to @subject }
+        else
+          format.html { redirect_to assignments_url }
+        end
       format.json { head :no_content }
     end
   end

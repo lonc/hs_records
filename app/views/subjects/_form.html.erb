@@ -16,40 +16,36 @@
             <%= f.text_field :name %>
           </div>
           <div class="field">
-            <%= f.label :baseid %><br />
-            <%= f.number_field :baseid %>
+            <%= f.label :Student %><br />
+            <%= select(:subject, :student_id, @students.map { |s| [ s.name, s.id ] }, { :prompt => true }) %>
           </div>
           <div class="field">
-            <%= f.label :Resource %><br />
-            <%= select(:subject, :resource_id, @resources.map { |r| [ r.title, r.id ] }, { :prompt => true }) %>
+            <%= f.label :"Should a grade be recorded?" %>
+            <%= f.check_box :graded %><br />
           </div>
           <div class="field">
-            <%= f.label :Graded? %><br />
-            <%= f.check_box :graded %>
+            <%= f.label :"Can students record their own score?" %>
+            <%= f.check_box :studentupdate %><br />
           </div>
           <div class="field">
-            <%= f.label :Student_scored %><br />
-            <%= f.check_box :studentupdate %>
+            <%= f.label  :Monday %>
+            <%= f.check_box :AssignOnMonday %><br />
           </div>
           <div class="field">
-            <%= f.label  :Monday %><br />
-            <%= f.check_box :AssignOnMonday %>
+            <%= f.label :Tuesday %>
+            <%= f.check_box :AssignOnTuesday %><br />
           </div>
           <div class="field">
-            <%= f.label :Tuesday %><br />
-            <%= f.check_box :AssignOnTuesday %>
+            <%= f.label :Wednesday %>
+            <%= f.check_box :AssignOnWednesday %><br />
           </div>
           <div class="field">
-            <%= f.label :Wednesday %><br />
-            <%= f.check_box :AssignOnWednesday %>
+            <%= f.label :Thursday %>
+            <%= f.check_box :AssignOnThursday %><br />
           </div>
           <div class="field">
-            <%= f.label :Thursday %><br />
-            <%= f.check_box :AssignOnThursday %>
-          </div>
-          <div class="field">
-            <%= f.label :Friday %><br />
-            <%= f.check_box :AssignOnFriday %>
+            <%= f.label :Friday %>
+            <%= f.check_box :AssignOnFriday %><br />
           </div>
           <div class="actions">
             <%= f.submit %>

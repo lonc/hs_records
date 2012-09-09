@@ -1,34 +1,38 @@
 <p id="notice"><%= notice %></p>
 
+<%= link_to 'Subjects', subjects_path %>
+
 <p>
   <b>Name:</b>
   <%= @subject.name %>
 </p>
-<p>
-  <b>Assignment Day: </b>
-  <%= $day %>
-</p>
 
 
-
-<%= render :partial => "assignments/assignments", :collection => @assignments %>
+<%= render :partial => "assignments/assignments", :collection => @assignments, :locals => { :return_subject => @subject } %>
 
 
 <%= form_for([@subject, @new_assign]) do |f| %>
   <div class="field">
-    <%= f.hidden_field :subject_id, :default => @subject_id %>
+    <%= f.hidden_field :subject_id, :value => @subject.id %>
   </div>
   <div class="field">
-    <%= f.label :Assignment %><br />
-    <%= f.text_field :assignment %>
+    Assignment         : <%= f.text_field :assignment %>
   </div>
   <div class="field">
-    <%= f.label :student_scored %><br />
-    <%= f.check_box :studentupdate %>
+    Projected Date     : <%= @adate.strftime("%^A") %> <%= f.date_select :date_assigned, :start_year => Time.now.year, :end_year => Time.now.year + 1, :use_short_month => true, :default => @adate %>
+  </div>
+  <div class="field">
+    Teachers Comments  :<%= f.text_field :watchfor %>
+  </div>
+  <div class="field">
+    Materials Required :<%= f.text_field :materialsrequired %>
+  </div>
+  <div class="field">
+    Materials Reminder :<%= f.date_select :notify_by, :include_blank => true, :default => nil %>
   </div>
   <div class="actions">
     <%= f.submit "Create Assignment" %>
   </div>
 <%end%>
 
-<%= link_to 'Back', subjects_path %>
+<%= link_to 'Subjects', subjects_path %>

@@ -1,4 +1,8 @@
 class StudentsController < ApplicationController
+
+  respond_to :html 
+  @@assignment_list = Array.new
+
   # GET /students
   # GET /students.json
   def index
@@ -21,6 +25,12 @@ class StudentsController < ApplicationController
     end
   end
 
+  # GET /students/1/select_daily
+  def select_daily
+   @students = Student.all
+   respond_with (@students)
+  end
+
   # GET /students/new
   # GET /students/new.json
   def new
@@ -32,22 +42,66 @@ class StudentsController < ApplicationController
     end
   end
 
+  # GET /students/1/daily_list
+  def daily_list
+    @student_list = Array.new
+    @students = params[:students]
+    date_params = params[:date]
+    @date = DateTime.new(date_params["assigned(1i)"].to_i, date_params["assigned(2i)"].to_i, date_params["assigned(3i)"].to_i)
+    @students.each do |s|
+      stu = Student.find(s)
+      @assign_list = Student.daily_assignments stu, @date
+      @assign_list.each do |al|
+        @@assignment_list.push(al[:id])
+      end
+      student_h = {:student => stu, :a_list => @assign_list}
+      @student_list.push(student_h)
+    end
+    respond_with(@student_list)
+  end
+
   # GET /students/1/edit
   def edit
     @student = Student.find(params[:id])
   end
 
-  # GET /students/1
-  # GET /students/1.json
-  def classes
+  # GET /students/1/select_subjects
+  def select_subjects
     @student = Student.find(params[:id])
-    @subjects = Subject.order("name")
+    @subns = Subject.where(:student_id => nil).select("name").order("name")
+    @subns = @subns.map{|sub| sub.name} 
+    @subds = Subject.where(:student_id => nil).select("id").order("name")
+    @subds = @subds.map{|sub| sub.id} 
+    @subject_hash = Hash[@subds.zip @subns]
+  end
+ 
+  # PUT /students/1/select_save
+  def select_save
+    @class = params[:class]
+    @student_id = params[:id]
+    @class.each do |id|
+      old_subject = Subject.find(id)
+      new_subject = old_subject.dup
+      new_subject.student_id = @student_id
+      new_subject.save
+      old_subject.assignments.each do |assignment|
+        new_assignment = assignment.dup
+        new_assignment.subject_id = new_subject.id
+        new_assignment.save
+      end
+    end
 
     respond_to do |format|
-      format.html # classes.html.erb
-      format.json { render :json => @student }
+      format.html { redirect_to students_url, :notice => 'Subject and assignments created.' }
     end
   end
+
+  # PUT /students/1/accept_assignments
+  #def accept_assignments
+  #  @assign_id = params[:assignment_id]
+  #  @studentL_id params[:id]
+
+
 
   # POST /students
   # POST /students.json
@@ -64,34 +118,6 @@ class StudentsController < ApplicationController
       end
     end
   end
-
-#  # POST /student_assignments
-#  # POST /student_assignments.json
-#  def add_assign
-#    @std_subs = params[subject][student_id]
-#    @t_sub = params[t_sub]
-#    @assign = @student.@t_sub.@assignment.new
-#
-#    respond_to do |format|
-#      if @assign.save
-#        format.html # student_assignments.html.erb
-#        #format.json { render :json => @assign }
-#        end
-#     end
-#  end
-#
-#  # POST /student_assignments
-#  # POST /student_assignments.json
-#  def create_assign
-#    @assign = @student.@t_sub.@assignment.create(params[:assignment])
-#
-#    respond_to do |format|
-#      if @assign.save
-#        format.html { redirect_to @add_assign }
-#        #format.json { render :json => @add_assign, :status => :created, :location => @add_assign }
-#        end
-#     end
-#  end
 
 
   # PUT /students/1
@@ -110,6 +136,18 @@ class StudentsController < ApplicationController
     end
   end
 
+  # PUT /students
+  def update_assigned
+    respond_to do |format|
+      if Assignment.upd_assign @@assignment_list
+        format.html { redirect_to students_url, :notice => 'Assignments were marked as assigned.' }
+      else
+        format.html { redirect_to students_url, :notice => 'WARNING:: NO ASSIGNMENTS WERE MARKED AS ASSIGNED.' }
+      end
+    end
+  end
+
+    
   # DELETE /students/1
   # DELETE /students/1.json
   def destroy

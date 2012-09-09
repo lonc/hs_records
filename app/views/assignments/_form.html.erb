@@ -11,33 +11,32 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :Subject %><br />
-    <%= f.number_field :subject_id %>
+    <div class="field">
+    <%= hidden_field_tag :return_subject, params[:return_subject] %>
   </div>
   <div class="field">
     <%= f.label :Assignment %><br />
-    <%= f.number_field :assignment %>
+    <%= f.text_field :assignment %>
   </div>
   <div class="field">
     <%= f.label :Assigned? %><br />
-    <%= f.text_field :assigned %>
+    <%= f.check_box :assigned %>
   </div>
   <div class="field">
     <%= f.label :"Date Assigned" %><br />
     <%= f.date_select :date_assigned %>
   </div>
   <div class="field">
-    <%= f.label :Completed? %><br />
-    <%= f.text_field :completed %>
+    <%= f.label :"Teacher Comments" %><br />
+    <%= f.text_field :watchfor %>
   </div>
   <div class="field">
-    <%= f.label :"Date completed" %><br />
-    <%= f.date_select :date_completed %>
+    <%= f.label :Materials %><br />
+    <%= f.text_field :materialsrequired %>
   </div>
   <div class="field">
-    <%= f.label :Score %><br />
-    <%= f.text_field :score %>
+    <%= f.label :"Materials Reminder" %><br />
+    <%= f.date_select :notify_by, :include_blank => true, :default => nil %>
   </div>
   <div class="actions">
     <%= f.submit %>

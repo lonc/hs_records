@@ -13,6 +13,7 @@ class Student < ActiveRecord::Base
 
    has_many :subjects
    has_many :assignments, :through => :subjects 
+   has_many :resources, :through => :subjects 
 
 
    def phone_number_is_required
@@ -21,4 +22,44 @@ class Student < ActiveRecord::Base
             errors.add(:phone_h, "must have at least one valid phone number")
       end
    end
+
+   def self.daily_assignments (student, date)
+     @today = date.wday
+     @todays_assignments = Array.new
+ 
+      student.subjects.each do |s| 
+        @print = false
+        case @today 
+        when 1
+          if s.AssignOnMonday == '1' 
+            @print = true 
+          end 
+        when 2 
+          if s.AssignOnTuesday == '1' 
+            @print = true 
+          end 
+        when 3 
+          if s.AssignOnWednesday == '1' 
+            @print = true 
+          end 
+        when 4 
+          if s.AssignOnThursday == '1' 
+            @print = true 
+          end 
+        when 5 
+          if s.AssignOnFriday == '1' 
+            @print = true 
+          end 
+        end 
+     
+        if @print 
+          @assignment = s.assignments.where("assigned != 1").first 
+          if @assignment
+            assign_h = {:subject => s.name, :assignment => @assignment.assignment, :id => @assignment.id}
+            @todays_assignments.push(assign_h)
+          end
+        end 
+      end
+      return @todays_assignments
+    end
 end

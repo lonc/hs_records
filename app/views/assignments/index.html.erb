@@ -1,14 +1,17 @@
 <h1>Listing assignments</h1>
 
+<%= link_to 'Subjects', subjects_path %> | 
+<%= link_to 'Students', students_path %> | 
+<%= link_to 'Resources', resources_path %> 
+
+
 <table>
   <tr>
     <th>Subject</th>
+    <th>Assign ID </th>
     <th>Assignment</th>
     <th>Assigned</th>
     <th>Date assigned</th>
-    <th>Completed</th>
-    <th>Date completed</th>
-    <th>Score</th>
     <th></th>
     <th></th>
     <th></th>
@@ -17,12 +20,10 @@
 <% @assignments.each do |assignment| %>
   <tr>
     <td><%= assignment.subject_id %></td>
+    <td><%= assignment.id %></td>
     <td><%= assignment.assignment %></td>
     <td><%= assignment.assigned %></td>
     <td><%= assignment.date_assigned %></td>
-    <td><%= assignment.completed %></td>
-    <td><%= assignment.date_completed %></td>
-    <td><%= assignment.score %></td>
     <td><%= link_to 'Show', assignment %></td>
     <td><%= link_to 'Edit', edit_assignment_path(assignment) %></td>
     <td><%= link_to 'Destroy', assignment, :confirm => 'Are you sure?', :method => :delete %></td>
