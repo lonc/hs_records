@@ -1,0 +1,16 @@
+<p id="classes"><%= classes %></p>
+
+
+<p>
+  <b>Name:</b>
+  <%= @student.name %>
+</p>
+
+<div class="field">
+  <%= label_tag 'Subjects' %><br />
+  <%= select_tag ('classes[]', options_for_select(@subject_hash), :multiple => true, :size => 15 ) %>
+</div>
+ 
+<div class="actions">
+  <%= submit_tag "select_save", :controller => "student" %>
+</div>

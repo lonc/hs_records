@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <% @student_list.each do |s| %>
+    <%= @date.strftime ("%A %B %d, %Y") %> <br/>
+    <br/>
+    <b><%= s[:student].name%></b><br/>
+    <br/>
+</p>
+
+  <P> 
+    <% s[:a_list].each do |a| %>
+     <b> <%= a[:subject] %></b> <br>
+     |______| <%= a[:assignment] %> <br><br>
+    <% end %>
+  </P>
+<% end %>
+
+<%= link_to 'Back', students_path %>
+<div class="actions"> 
+ <%= button_to "Accept", :action => "update_assigned", :controller => "students" %> 
+</div>
+ 
+
