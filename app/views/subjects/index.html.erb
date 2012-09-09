@@ -1,0 +1,45 @@
+<h1>Listing subjects</h1>
+
+<%= link_to 'Students', students_path %> | 
+<%= link_to 'Assignments', assignments_path %> |
+<%= link_to 'Resources', resources_path %> <br>
+
+<%= link_to 'New Subject', new_subject_path %> 
+
+<table>
+  <tr>
+    <th>id</th>
+    <th></th>
+    <th></th>
+    <th>Name</th>
+    <th>Student</th>
+    <th>Graded</th>
+    <th>Student Scored</th>
+    <th> M </th>
+    <th> T </th>
+    <th> W </th>
+    <th> H </th>
+    <th> F </th>
+    <th></th>
+  </tr>
+
+<% @subjects.each do |subject| %>
+  <tr>
+    <td><%= subject.id %></td>
+    <td><%= link_to 'Edit', edit_subject_path(subject) %></td>
+    <td><%= link_to 'Destroy', subject, :confirm => 'Are you sure?', :method => :delete %></td>
+    <td><%= subject.name %></td>
+    <td><%= @student_names.fetch(subject.student_id) %></td>
+    <td><%= subject.graded %></td>
+    <td><%= subject.studentupdate %></td>
+    <td><%= subject.AssignOnMonday %></td>
+    <td><%= subject.AssignOnTuesday %></td>
+    <td><%= subject.AssignOnWednesday %></td>
+    <td><%= subject.AssignOnThursday %></td>
+    <td><%= subject.AssignOnFriday %></td>
+    <td><%= link_to 'Add Assignments', subject %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />

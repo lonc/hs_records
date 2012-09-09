@@ -1,0 +1,45 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Subject:</b>
+  <%= @assignment.subject_id %>
+</p>
+
+<p>
+  <b>Assignment:</b>
+  <%= @assignment.assignment %>
+</p>
+
+<p>
+  <b>Assigned:</b>
+  <%= @assignment.assigned %>
+</p>
+
+<p>
+  <b>Date assigned:</b>
+  <%= @assignment.date_assigned %>
+</p>
+
+<p>
+  <b>Teacher Comments:</b>
+  <%= @assignment.watchfor %>
+</p>
+
+<p>
+  <b>Materials Required:</b>
+  <%= @assignment.materialsrequired %>
+</p>
+
+<p>
+  <b>Materials Reminder:</b>
+  <%= @assignment.notify_by %>
+</p>
+
+<p>
+  <b>Score:</b>
+  <%= @assignment.score %>
+</p>
+
+
+<%= link_to 'Edit', edit_assignment_path(@assignment) %> |
+<%= link_to 'Back', assignments_path %>

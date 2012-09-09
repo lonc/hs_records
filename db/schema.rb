@@ -11,22 +11,20 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120716000337) do
+ActiveRecord::Schema.define(:version => 20120907211033) do
 
   create_table "assignments", :force => true do |t|
     t.string   "assignment",        :null => false
     t.binary   "assigned"
     t.date     "date_assigned"
-    t.binary   "completed"
-    t.date     "date_completed"
     t.decimal  "score"
     t.integer  "subject_id",        :null => false
     t.datetime "created_at",        :null => false
     t.datetime "updated_at",        :null => false
     t.text     "watchfor"
     t.text     "materialsrequired"
-    t.integer  "notifyby"
     t.binary   "studentupdate"
+    t.date     "notify_by"
   end
 
   create_table "notes", :force => true do |t|
@@ -36,13 +34,12 @@ ActiveRecord::Schema.define(:version => 20120716000337) do
   end
 
   create_table "resources", :force => true do |t|
-    t.string   "title",            :null => false
+    t.string   "title",         :null => false
     t.string   "Publisher"
-    t.string   "Author"
-    t.string   "publication_date"
-    t.datetime "created_at",       :null => false
-    t.datetime "updated_at",       :null => false
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
     t.integer  "NumberOfPages"
+    t.integer  "subject_id"
   end
 
   create_table "students", :force => true do |t|
@@ -62,18 +59,17 @@ ActiveRecord::Schema.define(:version => 20120716000337) do
   end
 
   create_table "subjects", :force => true do |t|
-    t.string   "name",                             :null => false
+    t.string   "name",              :null => false
     t.binary   "graded"
-    t.datetime "created_at",                       :null => false
-    t.datetime "updated_at",                       :null => false
+    t.datetime "created_at",        :null => false
+    t.datetime "updated_at",        :null => false
     t.binary   "studentupdate"
     t.binary   "AssignOnMonday"
     t.binary   "AssignOnTuesday"
     t.binary   "AssignOnWednesday"
     t.binary   "AssignOnThursday"
     t.binary   "AssignOnFriday"
-    t.integer  "resource_id",       :default => 1, :null => false
-    t.integer  "student_id",        :default => 1, :null => false
+    t.integer  "student_id"
   end
 
 end

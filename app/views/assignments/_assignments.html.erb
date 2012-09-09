@@ -1,0 +1,9 @@
+<table>
+  <tr>
+    <td><%= assignments.date_assigned %></td>
+    <td><%= assignments.assignment %></td>
+    <td><%= assignments.assigned %></td>
+    <td><%= link_to 'Edit', edit_assignment_path(assignments, :return_subject => return_subject ) %></td>
+    <td><%= link_to 'Destroy', assignments, :confirm => 'Are you sure?', :method => :delete, :return_subject => params[:return_subject] %></td>
+  </tr>
+  </table>

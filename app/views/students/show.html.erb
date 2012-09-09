@@ -1,0 +1,62 @@
+<p id="notice"><%= notice %></p>
+
+
+<p>
+  <b>Name:</b>
+  <%= @student.name %>
+</p>
+
+<p>
+  <b>Email:</b>
+  <%= @student.email %>
+</p>
+
+<p>
+  <b>Parent:</b>
+  <%= @student.parent %>
+</p>
+
+<p>
+  <b>Phone h:</b>
+  <%= @student.phone_h %>
+</p>
+
+<p>
+  <b>Phone c:</b>
+  <%= @student.phone_c %>
+</p>
+
+<p>
+  <b>Phone w:</b>
+  <%= @student.phone_w %>
+</p>
+
+<p>
+  <b>Address:</b>
+  <%= @student.address %>
+</p>
+
+<p>
+  <b>City:</b>
+  <%= @student.city %>
+</p>
+
+<p>
+  <b>State:</b>
+  <%= @student.state %>
+</p>
+
+<p>
+  <b>Zip:</b>
+  <%= @student.zip %>
+</p>
+
+<p>
+  <b>Birthdate:</b>
+  <%= @student.birthdate %>
+</p>
+
+
+<%= link_to 'Edit', edit_student_path(@student) %> |
+<%= link_to 'Destroy', @student, :confirm => 'Are you sure?', :method => :delete %>
+<%= link_to 'Back', students_path %>

@@ -1,0 +1,10 @@
+<p id="notice"><%= notice %></p>
+
+
+<p>
+  <div class="field">
+    <%= select_date Date.today, :prefix => :assign_date%>
+  </div>
+
+<%= link_to 'next', daily_list_student_path(@student, :assign_date) %> | 
+<%= link_to 'Back', students_path %>

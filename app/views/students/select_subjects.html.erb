@@ -1,0 +1,18 @@
+<p id="notice"><%= notice %></p>
+
+
+<p>
+  <b>Name:</b>
+  <%= @student.name %>
+</p>
+
+<%= form_tag select_save_student_path, :method => "submit" do %>
+   <div class="field">
+     <%= label_tag 'Subjects' %><br />
+     <%= select_tag 'class[]', options_from_collection_for_select(@subject_hash, :first, :last), :multiple => true, :size => 15 %>
+   </div>
+    
+   <div class="actions"> 
+    <%= button_to "Save", :action => "select_save", :controller => "students" %> 
+   </div>
+<% end %>

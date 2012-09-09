@@ -1,0 +1,44 @@
+<%= form_for(@assignment) do |f| %>
+  <% if @assignment.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@assignment.errors.count, "error") %> prohibited this assignment from being saved:</h2>
+
+      <ul>
+      <% @assignment.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+    <div class="field">
+    <%= hidden_field_tag :return_subject, params[:return_subject] %>
+  </div>
+  <div class="field">
+    <%= f.label :Assignment %><br />
+    <%= f.text_field :assignment %>
+  </div>
+  <div class="field">
+    <%= f.label :Assigned? %><br />
+    <%= f.check_box :assigned %>
+  </div>
+  <div class="field">
+    <%= f.label :"Date Assigned" %><br />
+    <%= f.date_select :date_assigned %>
+  </div>
+  <div class="field">
+    <%= f.label :"Teacher Comments" %><br />
+    <%= f.text_field :watchfor %>
+  </div>
+  <div class="field">
+    <%= f.label :Materials %><br />
+    <%= f.text_field :materialsrequired %>
+  </div>
+  <div class="field">
+    <%= f.label :"Materials Reminder" %><br />
+    <%= f.date_select :notify_by, :include_blank => true, :default => nil %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
