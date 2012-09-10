@@ -48,22 +48,24 @@ class SubjectsController < ApplicationController
   # GET /subjects/new
   # GET /subjects/new.json
   def new
-    @resources = Resource.order("title")
     # Don't want to be able to select student here, but not sure how to disable it
     @students = Student.where(:name => "xxxx")
     @subject = Subject.new
+    @b_id = @subject.id
 
-    respond_to do |format|
-      format.html # new.html.erb
-      format.json { render :json => @subject }
-    end
+    respond_with(@resources, @students, @subject, @b_id)
   end
 
   # GET /subjects/1/edit
   def edit
-    @resources = Resource.order("title")
     @students = Student.order("name")
     @subject = Subject.find(params[:id])
+    if @subject.student_id = nil
+      @b_id = @subject.id
+    else
+      @b_id = @subject.base_id
+    end
+    respond_with(@resources, @students, @subject, @b_id)
   end
 
   # POST /subjects

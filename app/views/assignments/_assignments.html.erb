@@ -2,7 +2,13 @@
   <tr>
     <td><%= assignments.date_assigned %></td>
     <td><%= assignments.assignment %></td>
+    <td> -- </td>
     <td><%= assignments.assigned %></td>
+    <td> -- TC </td>
+    <td><%= assignments.watchfor %></td>
+    <td> -- MR </td>
+    <td><%= assignments.materialsrequired %></td>
+    <td><%= assignments.notify_by %></td>
     <td><%= link_to 'Edit', edit_assignment_path(assignments, :return_subject => return_subject ) %></td>
     <td><%= link_to 'Destroy', assignments, :confirm => 'Are you sure?', :method => :delete, :return_subject => params[:return_subject] %></td>
   </tr>

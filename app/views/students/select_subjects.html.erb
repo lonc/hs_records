@@ -11,6 +11,14 @@
      <%= label_tag 'Subjects' %><br />
      <%= select_tag 'class[]', options_from_collection_for_select(@subject_hash, :first, :last), :multiple => true, :size => 15 %>
    </div>
+  <div class="field">
+    <%= label_tag 'Start Date' %><br />
+    <%= date_select :start_date, :start, :start_year => Time.now.year - 5, :end_year => Time.now.year + 1, :size => 15, :use_short_month => true, :include_blank => true, :deafult => nil %>
+  </div>
+  <div class="field">
+    <%= label_tag 'End Date' %><br />
+    <%= date_select :stop_date, :stop, :start_year => Time.now.year - 1, :end_year => Time.now.year + 1, :size => 15, :use_short_month => true, :include_blank => true, :deafult => nil %>
+  </div>
     
    <div class="actions"> 
     <%= button_to "Save", :action => "select_save", :controller => "students" %> 

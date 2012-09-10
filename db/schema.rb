@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120907211033) do
+ActiveRecord::Schema.define(:version => 20120909210732) do
 
   create_table "assignments", :force => true do |t|
     t.string   "assignment",        :null => false
@@ -70,6 +70,9 @@ ActiveRecord::Schema.define(:version => 20120907211033) do
     t.binary   "AssignOnThursday"
     t.binary   "AssignOnFriday"
     t.integer  "student_id"
+    t.text     "nickname"
+    t.integer  "base_id"
+    t.integer  "priority"
   end
 
 end

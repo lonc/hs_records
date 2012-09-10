@@ -1,5 +1,5 @@
 class Subject < ActiveRecord::Base
-   attr_accessible :name, :graded, :studentupdate, :AssignOnMonday, :AssignOnTuesday, :AssignOnWednesday, :AssignOnThursday, :AssignOnFriday, :student_id
+   attr_accessible :name, :graded, :studentupdate, :AssignOnMonday, :AssignOnTuesday, :AssignOnWednesday, :AssignOnThursday, :AssignOnFriday, :student_id, :nickname, :base_id, :priority
    validates :name, :presence => true
 
    belongs_to :students
@@ -83,4 +83,22 @@ class Subject < ActiveRecord::Base
      end
      return @next_date
    end
- end
+
+  def self.find_student_subject sub_id, sub_student
+    id = Subject.where("base_id = ? AND student_id = ?", sub_id, sub_student)
+  end
+
+  def self.dup_assignments src_id, dest_id, start_date, stop_date
+    src_subject = Subject.find(src_id)
+    dest_subject = Subject.find(dest_id)
+    src_assignments = src_subject.assignments.where(:date_assigned => start_date..stop_date)
+    src_assignments.each do |assignment|
+      new_assignment = assignment.dup
+      new_assignment.save
+      dest_id = dest_subject.map{|ds| ds.id}
+      subject_h = {:subject_id => dest_id}
+      new_assignment.update_attributes(subject_h)
+    end
+  end
+
+end

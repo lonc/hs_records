@@ -26,8 +26,9 @@ class Student < ActiveRecord::Base
    def self.daily_assignments (student, date)
      @today = date.wday
      @todays_assignments = Array.new
+     @subs = student.subjects.order(:priority)
  
-      student.subjects.each do |s| 
+      @subs.each do |s| 
         @print = false
         case @today 
         when 1
@@ -55,11 +56,12 @@ class Student < ActiveRecord::Base
         if @print 
           @assignment = s.assignments.where("assigned != 1").first 
           if @assignment
-            assign_h = {:subject => s.name, :assignment => @assignment.assignment, :id => @assignment.id}
+            assign_h = {:subject => s.nickname, :assignment => @assignment.assignment, :id => @assignment.id}
             @todays_assignments.push(assign_h)
           end
         end 
       end
       return @todays_assignments
     end
+
 end

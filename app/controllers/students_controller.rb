@@ -79,28 +79,37 @@ class StudentsController < ApplicationController
   def select_save
     @class = params[:class]
     @student_id = params[:id]
+    start_params = params[:start_date]
+    @start_date = DateTime.new(start_params["start(1i)"].to_i, start_params["start(2i)"].to_i, start_params["start(3i)"].to_i)
+    stop_params = params[:stop_date]
+    @stop_date = DateTime.new(stop_params["stop(1i)"].to_i, stop_params["stop(2i)"].to_i, stop_params["stop(3i)"].to_i)
     @class.each do |id|
-      old_subject = Subject.find(id)
-      new_subject = old_subject.dup
-      new_subject.student_id = @student_id
-      new_subject.save
-      old_subject.assignments.each do |assignment|
-        new_assignment = assignment.dup
-        new_assignment.subject_id = new_subject.id
-        new_assignment.save
+      @dest = Subject.find_student_subject id, @student_id
+      if @dest.blank?
+        new_subject = src_subject.dup
+        new_subject.student_id = @student_id
+        new_subject.save
+        @dest_id = new_subject.id
+      else
+        @dest_id = @dest.map{|d| d.id}
       end
+
+      @start_date = @start_date - 1
+      Subject.dup_assignments id, @dest_id, @start_date, @stop_date
+#      src_subject = Subject.find(id)
+#      src_assignments = src_subject.assignments.where(:date_assigned => @start_date..@stop_date)
+#      src_assignments.each do |assignment|
+#        new_assignment = assignment.dup
+#        new_assignment.save
+#        debugger
+#        new_assignment.update_attributes(:subject_id => @dest_id)
+#      end
     end
 
     respond_to do |format|
       format.html { redirect_to students_url, :notice => 'Subject and assignments created.' }
     end
   end
-
-  # PUT /students/1/accept_assignments
-  #def accept_assignments
-  #  @assign_id = params[:assignment_id]
-  #  @studentL_id params[:id]
-
 
 
   # POST /students
