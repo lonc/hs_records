@@ -16,8 +16,20 @@
             <%= f.text_field :name %>
           </div>
           <div class="field">
+            <%= f.label :"Nick Name" %><br />
+            <%= f.text_field :nickname %>
+          </div>
+          <div class="field">
+            <%= f.label :"Base ID" %><br />
+            <%= f.text_field :base_id, :value => @b_id %>
+          </div>
+          <div class="field">
+            <%= f.label :Priority %><br />
+            <%= f.select :priority, [[1,1],[2,2],[3,3],[4,4],[5,5]], :selected => 3  %>
+          </div>
+          <div class="field">
             <%= f.label :Student %><br />
-            <%= select(:subject, :student_id, @students.map { |s| [ s.name, s.id ] }, { :prompt => true }) %>
+            <%= select(:subject, :student_id, @students.map { |s| [ s.name, s.id ] }, :selected => @subject.student_id) %>
           </div>
           <div class="field">
             <%= f.label :"Should a grade be recorded?" %>
