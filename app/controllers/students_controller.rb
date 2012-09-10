@@ -80,9 +80,17 @@ class StudentsController < ApplicationController
     @class = params[:class]
     @student_id = params[:id]
     start_params = params[:start_date]
-    @start_date = DateTime.new(start_params["start(1i)"].to_i, start_params["start(2i)"].to_i, start_params["start(3i)"].to_i)
+    if start_params["start(1i)"] = ""
+      @start_date = nil
+    else
+      @start_date = DateTime.new(start_params["start(1i)"].to_i, start_params["start(2i)"].to_i, start_params["start(3i)"].to_i)
+    end
     stop_params = params[:stop_date]
-    @stop_date = DateTime.new(stop_params["stop(1i)"].to_i, stop_params["stop(2i)"].to_i, stop_params["stop(3i)"].to_i)
+    if stop_params["start(1i)"] = ""
+      @stop_date = nil
+    else
+      @stop_date = DateTime.new(stop_params["stop(1i)"].to_i, stop_params["stop(2i)"].to_i, stop_params["stop(3i)"].to_i)
+    end
     @class.each do |id|
       @dest = Subject.find_student_subject id, @student_id
       if @dest.blank?
@@ -95,7 +103,7 @@ class StudentsController < ApplicationController
         @dest_id = @dest.map{|d| d.id}
       end
 
-      @start_date = @start_date - 1
+      @start_date = @start_date - 1 if @start_date
       Subject.dup_assignments id, @dest_id, @start_date, @stop_date
 #      src_subject = Subject.find(id)
 #      src_assignments = src_subject.assignments.where(:date_assigned => @start_date..@stop_date)

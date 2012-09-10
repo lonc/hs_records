@@ -1,5 +1,6 @@
 <p id="notice"><%= notice %></p>
 
+<H1> Students Assignments </H1>
 <%= form_tag students_daily_list_path, :method => "get" do %>
   <div class="field">
     <%= label_tag 'Assignment Date' %><br />
@@ -15,3 +16,18 @@
     <%= button_to "Daily Assignments", :controller => "students", :action => "daily_list" %> 
    </div>
 <% end %>
+
+
+<H1> Teachers Notes </H1>
+
+<%= form_tag assignments_teachers_notes_path, :method => "get" do %>
+  <div class="field">
+    <%= label_tag 'Date' %><br />
+    <%= date_select :date, :selected, :start_year => Time.now.year, :end_year => Time.now.year + 1, :size => 31, :use_short_month => true, :default => Time.now %>
+  </div>
+
+   <div class="actions"> 
+    <%= button_to "Teachers Notes", :controller => "assignments", :action => "teachers_notes" %> 
+   </div>
+<% end %>
+

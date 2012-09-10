@@ -1,4 +1,6 @@
 class AssignmentsController < ApplicationController
+
+  respond_to :html
   # GET /assignments
   # GET /assignments.json
   def index
@@ -21,6 +23,17 @@ class AssignmentsController < ApplicationController
     end
   end
 
+  # GET /assignments/tc
+  def teachers_notes 
+    date_params = params[:date]
+    @date = DateTime.new(date_params["selected(1i)"].to_i, date_params["selected(2i)"].to_i, date_params["selected(3i)"].to_i)
+
+    @notes1 = Assignment.where(:date_assigned => @date, :watchfor => )
+    @notes2 = Assignment.where(:notify_by => @date)
+
+    respond_with(@notes1, @notes2)
+    
+  end
   # GET /assignments/new
   # GET /assignments/new.json
   def new
@@ -29,14 +42,6 @@ class AssignmentsController < ApplicationController
     respond_to do |format|
       format.html # new.html.erb
       format.json { render :json => @assignment }
-    end
-  end
-
-  # GET /assignments/_new_assign
-  def new_assign
-
-    respond_to do |format|
-      format.html # _new_assign.html.erb
     end
   end
 
