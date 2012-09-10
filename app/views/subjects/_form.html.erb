@@ -29,7 +29,7 @@
           </div>
           <div class="field">
             <%= f.label :Student %><br />
-            <%= select(:subject, :student_id, @students.map { |s| [ s.name, s.id ] }, :selected => @subject.student_id) %>
+            <%= select(:subject, :student_id, @students.map { |s| [ s.name, s.id ] }, :include_blank => true, :selected => @subject.student_id) %>
           </div>
           <div class="field">
             <%= f.label :"Should a grade be recorded?" %>
