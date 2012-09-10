@@ -3,10 +3,11 @@ HomeSchool::Application.routes.draw do
   match 'students/select_daily', :to => 'students#select_daily'
   match 'students/daily_list', :to => 'students#daily_list'
   match 'students/update_assigned', :to => 'students#update_assigned'
+  match 'assignments/teachers_notes', :to => 'assignments#teachers_notes'
 
   resources :notes
 
-  resources :assignments
+  resources :assignments 
 
   resources :subjects do
     member do

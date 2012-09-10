@@ -13,11 +13,11 @@
    </div>
   <div class="field">
     <%= label_tag 'Start Date' %><br />
-    <%= date_select :start_date, :start, :start_year => Time.now.year - 5, :end_year => Time.now.year + 1, :size => 15, :use_short_month => true  %>
+    <%= date_select :start_date, :start, :start_year => Time.now.year - 5, :end_year => Time.now.year + 1, :size => 15, :use_short_month => true, :include_blank => true %>
   </div>
   <div class="field">
     <%= label_tag 'End Date' %><br />
-    <%= date_select :stop_date, :stop, :start_year => Time.now.year - 1, :end_year => Time.now.year + 1, :size => 15, :use_short_month => true, :default => Time.local(2013,6,10) %>
+    <%= date_select :stop_date, :stop, :start_year => Time.now.year - 1, :end_year => Time.now.year + 1, :size => 15, :use_short_month => true, :include_blank => true, :default => Time.local(2013,6,10) %>
   </div>
     
    <div class="actions"> 
