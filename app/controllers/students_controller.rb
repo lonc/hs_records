@@ -86,6 +86,7 @@ class StudentsController < ApplicationController
     @class.each do |id|
       @dest = Subject.find_student_subject id, @student_id
       if @dest.blank?
+        src_subject = Subject.find(id)
         new_subject = src_subject.dup
         new_subject.student_id = @student_id
         new_subject.save

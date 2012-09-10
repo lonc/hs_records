@@ -91,11 +91,12 @@ class Subject < ActiveRecord::Base
   def self.dup_assignments src_id, dest_id, start_date, stop_date
     src_subject = Subject.find(src_id)
     dest_subject = Subject.find(dest_id)
+    subject_hash = {:base_id => src_id, :nickname => src_subject.nickname}
+    dest_subject.update_attributes(subject_hash)
     src_assignments = src_subject.assignments.where(:date_assigned => start_date..stop_date)
     src_assignments.each do |assignment|
       new_assignment = assignment.dup
       new_assignment.save
-      dest_id = dest_subject.map{|ds| ds.id}
       subject_h = {:subject_id => dest_id}
       new_assignment.update_attributes(subject_h)
     end

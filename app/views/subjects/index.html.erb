@@ -12,6 +12,7 @@
     <th></th>
     <th></th>
     <th>Name</th>
+    <th>Base ID</th>
     <th>Student</th>
     <th>Graded</th>
     <th>Priority</th>
@@ -29,6 +30,7 @@
     <td><%= link_to 'Edit', edit_subject_path(subject) %></td>
     <td><%= link_to 'Destroy', subject, :confirm => 'Are you sure?', :method => :delete %></td>
     <td><%= subject.name %></td>
+    <td><%= subject.base_id %></td>
     <td><%= @student_names.fetch(subject.student_id) %></td>
     <td><%= subject.graded %></td>
     <td><%= subject.priority %></td>
