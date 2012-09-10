@@ -60,10 +60,10 @@ class SubjectsController < ApplicationController
   def edit
     @students = Student.order("name")
     @subject = Subject.find(params[:id])
-    if @subject.student_id = nil
-      @b_id = @subject.id
-    else
+    if @subject.student_id? 
       @b_id = @subject.base_id
+    else
+      @b_id = @subject.id
     end
     respond_with(@resources, @students, @subject, @b_id)
   end
