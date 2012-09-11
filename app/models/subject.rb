@@ -1,5 +1,5 @@
 class Subject < ActiveRecord::Base
-   attr_accessible :name, :graded, :studentupdate, :AssignOnMonday, :AssignOnTuesday, :AssignOnWednesday, :AssignOnThursday, :AssignOnFriday, :student_id, :nickname, :base_id, :priority
+   attr_accessible :name, :graded, :studentupdate, :AssignOnMonday, :AssignOnTuesday, :AssignOnWednesday, :AssignOnThursday, :AssignOnFriday, :student_id, :nickname, :base_id, :priority, :repeating
    validates :name, :presence => true
 
    belongs_to :students
@@ -89,15 +89,13 @@ class Subject < ActiveRecord::Base
   end
 
   def self.dup_assignments (src_id, dest_id, start_date, stop_date)
-    debugger
     subject_hash = Hash.new
     src_subject = Subject.find(src_id)
     dest_subject = Subject.find(dest_id)
-    debugger
     subject_hash = {:base_id => src_id, :nickname => src_subject.nickname}
     dest_subject.update_attributes(subject_hash)
-    if !start_date || !stop_date
-      src_assignments = src_subject.assignments.where(:date_assigned => nil)
+    if src_subject.repeating
+      src_assignments = src_subject.assignments.all
     else
       src_assignments = src_subject.assignments.where(:date_assigned => start_date..stop_date)
     end

@@ -14,7 +14,11 @@ class Assignment < ActiveRecord::Base
 
   def self.upd_assign (assign_list)
     assign_list.each do |alid|
-      Assignment.update(alid, :assigned => 1)
+      sub_id = Assignment.find(alid).subject_id
+      @parent = Subject.find(sub_id)
+      if !@parent.repeating
+        Assignment.update(alid, :assigned => 1)
+      end
     end
   end
 

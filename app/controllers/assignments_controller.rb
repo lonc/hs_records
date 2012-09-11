@@ -25,11 +25,27 @@ class AssignmentsController < ApplicationController
 
   # GET /assignments/tc
   def teachers_notes 
+    @notes1 = Array.new
+    @notes2 = Array.new
     date_params = params[:date]
-    @date = DateTime.new(date_params["selected(1i)"].to_i, date_params["selected(2i)"].to_i, date_params["selected(3i)"].to_i)
-
-    @notes1 = Assignment.where(:date_assigned => @date, :watchfor => )
-    @notes2 = Assignment.where(:notify_by => @date)
+    @tmp = DateTime.new(date_params["selected(1i)"].to_i, date_params["selected(2i)"].to_i, date_params["selected(3i)"].to_i)
+    @date = @tmp.to_date
+    @t1 = Assignment.where("date_assigned = ? and watchfor != ?", @date, '')
+    @t1.each do |t|
+      @sb = t.subject_id
+      @subject = Subject.find(@sb).name
+      @hsh = {:subject => @subject, :comments => t.watchfor}
+      @notes1.push(@hsh)
+    end
+    @t2 = Assignment.where(:notify_by => @date)
+    @t2.each do |t|
+      @sb = t.subject_id
+      @subject = Subject.find(@sb).name
+      @hsh = {:subject => @subject, :date => t.date_assigned, :materials => t.materialsrequired}
+      @notes2.push(@hsh)
+    end
+    @notes1 = @notes1.uniq
+    @notes2 = @notes2.uniq
 
     respond_with(@notes1, @notes2)
     

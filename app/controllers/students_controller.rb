@@ -80,13 +80,13 @@ class StudentsController < ApplicationController
     @class = params[:class]
     @student_id = params[:id]
     start_params = params[:start_date]
-    if start_params["start(1i)"] = ""
+    if start_params["start(1i)"] == ""
       @start_date = nil
     else
       @start_date = DateTime.new(start_params["start(1i)"].to_i, start_params["start(2i)"].to_i, start_params["start(3i)"].to_i)
     end
     stop_params = params[:stop_date]
-    if stop_params["start(1i)"] = ""
+    if stop_params["start(1i)"] == ""
       @stop_date = nil
     else
       @stop_date = DateTime.new(stop_params["stop(1i)"].to_i, stop_params["stop(2i)"].to_i, stop_params["stop(3i)"].to_i)
