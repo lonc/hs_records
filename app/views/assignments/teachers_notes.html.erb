@@ -1,0 +1,31 @@
+
+<%= link_to 'Subjects', subjects_path %> | 
+<%= link_to 'Students', students_path %> | 
+<%= link_to 'Assignments', assignments_path %> | 
+<%= link_to 'Resources', resources_path %> 
+
+
+<h1>TEACHERS NOTES</h1>
+
+<% @notes1.each do |note| %>
+<p>
+  <b><%= note[:subject] %>--</b>
+  <%= note[:comments] %>
+</p>
+<% end %>
+
+
+<h1>MATERIALS NEEDED</h1>
+
+<% @notes2.each do |note| %>
+<p>
+  <b>Projected Date:</b> <%= note[:date] %>
+</p>
+<p>
+  <b><%= note[:subject] %></b>
+</p>
+<p>
+  <b>Materials:</b>
+  <%= note[:materials] %>
+</p>
+<% end %>
