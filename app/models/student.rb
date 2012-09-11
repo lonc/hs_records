@@ -54,7 +54,6 @@ class Student < ActiveRecord::Base
         end 
      
         if @print 
-          debugger
           @assignment = s.assignments.where(!:assigned).first 
           if @assignment
             assign_h = {:subject => s.nickname, :assignment => @assignment.assignment, :id => @assignment.id}
