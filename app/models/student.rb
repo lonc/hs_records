@@ -54,7 +54,7 @@ class Student < ActiveRecord::Base
         end 
      
         if @print 
-          @assignment = s.assignments.where(!:assigned).first 
+          @assignment = s.assignments.where(assigned: false).first 
           if @assignment
             assign_h = {:subject => s.nickname, :assignment => @assignment.assignment, :id => @assignment.id}
             @todays_assignments.push(assign_h)
