@@ -16,8 +16,8 @@ class Assignment < ActiveRecord::Base
     assign_list.each do |alid|
       sub_id = Assignment.find(alid).subject_id
       @parent = Subject.find(sub_id)
-      if !@parent.repeating
-        Assignment.update(alid, :assigned => 1)
+      if @parent.repeating == false
+        Assignment.update(alid, :assigned => true)
       end
     end
   end

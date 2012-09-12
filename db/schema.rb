@@ -24,7 +24,7 @@ ActiveRecord::Schema.define(:version => 20120912025548) do
     t.text     "materialsrequired"
     t.date     "notify_by"
     t.boolean  "assigned",          :default => false
-    t.boolean  "studentupdate"
+    t.boolean  "studentupdate",     :default => false
   end
 
   create_table "notes", :force => true do |t|
@@ -59,10 +59,9 @@ ActiveRecord::Schema.define(:version => 20120912025548) do
   end
 
   create_table "subjects", :force => true do |t|
-    t.string   "name",              :null => false
-    t.datetime "created_at",        :null => false
-    t.datetime "updated_at",        :null => false
-    t.binary   "studentupdate"
+    t.string   "name",                                 :null => false
+    t.datetime "created_at",                           :null => false
+    t.datetime "updated_at",                           :null => false
     t.binary   "AssignOnMonday"
     t.binary   "AssignOnTuesday"
     t.binary   "AssignOnWednesday"
@@ -72,8 +71,9 @@ ActiveRecord::Schema.define(:version => 20120912025548) do
     t.text     "nickname"
     t.integer  "base_id"
     t.integer  "priority"
-    t.boolean  "graded"
-    t.boolean  "repeating"
+    t.boolean  "graded",            :default => false
+    t.boolean  "repeating",         :default => false
+    t.boolean  "studentupdate",     :default => false
   end
 
 end
