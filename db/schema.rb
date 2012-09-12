@@ -11,20 +11,20 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120910125203) do
+ActiveRecord::Schema.define(:version => 20120912025548) do
 
   create_table "assignments", :force => true do |t|
-    t.string   "assignment",        :null => false
-    t.binary   "assigned"
+    t.string   "assignment",                           :null => false
     t.date     "date_assigned"
     t.decimal  "score"
-    t.integer  "subject_id",        :null => false
-    t.datetime "created_at",        :null => false
-    t.datetime "updated_at",        :null => false
+    t.integer  "subject_id",                           :null => false
+    t.datetime "created_at",                           :null => false
+    t.datetime "updated_at",                           :null => false
     t.text     "watchfor"
     t.text     "materialsrequired"
-    t.binary   "studentupdate"
     t.date     "notify_by"
+    t.boolean  "assigned",          :default => false
+    t.boolean  "studentupdate"
   end
 
   create_table "notes", :force => true do |t|
@@ -60,7 +60,6 @@ ActiveRecord::Schema.define(:version => 20120910125203) do
 
   create_table "subjects", :force => true do |t|
     t.string   "name",              :null => false
-    t.binary   "graded"
     t.datetime "created_at",        :null => false
     t.datetime "updated_at",        :null => false
     t.binary   "studentupdate"
@@ -73,7 +72,8 @@ ActiveRecord::Schema.define(:version => 20120910125203) do
     t.text     "nickname"
     t.integer  "base_id"
     t.integer  "priority"
-    t.binary   "repeating"
+    t.boolean  "graded"
+    t.boolean  "repeating"
   end
 
 end
