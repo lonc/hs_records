@@ -44,6 +44,7 @@ class StudentsController < ApplicationController
 
   # GET /students/1/daily_list
   def daily_list
+    @@assignment_list.clear
     @student_list = Array.new
     @students = params[:students]
     date_params = params[:date]
@@ -156,6 +157,7 @@ class StudentsController < ApplicationController
 
   # PUT /students
   def update_assigned
+    debugger
     respond_to do |format|
       if Assignment.upd_assign @@assignment_list
         format.html { redirect_to students_url, :notice => 'Assignments were marked as assigned.' }
