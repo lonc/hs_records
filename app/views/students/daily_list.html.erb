@@ -1,5 +1,11 @@
 <p id="notice"><%= notice %></p>
 
+<%= link_to 'Subjects', subjects_path %> | 
+<%= link_to 'Students', students_path %> | 
+<%= link_to 'Assignments', assignments_path %> |
+<%= link_to 'Resources', resources_path %> <br>
+
+
 <p>
   <% @student_list.each do |s| %>
     <%= @date.strftime ("%A %B %d, %Y") %> <br/>
@@ -20,7 +26,7 @@
 
 <%= link_to 'Back', students_path %>
 <div class="actions"> 
- <%= button_to "Accept", :action => "update_assigned", :controller => "students" %> 
+ <%= button_to "Accept", :action => "update_assigned", :controller => "students", :confirm => "Are You Sure?" %> 
 </div>
  
 
