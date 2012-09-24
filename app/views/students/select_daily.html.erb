@@ -1,5 +1,11 @@
 <p id="notice"><%= notice %></p>
 
+<%= link_to 'Subjects', subjects_path %> | 
+<%= link_to 'Students', students_path %> | 
+<%= link_to 'Assignments', assignments_path %> |
+<%= link_to 'Resources', resources_path %> <br>
+<br/>
+<br/>
 <H1> Students Assignments </H1>
 <%= form_tag students_daily_list_path, :method => "get" do %>
   <div class="field">
