@@ -27,7 +27,7 @@ class StudentsController < ApplicationController
 
   # GET /students/1/select_daily
   def select_daily
-   @students = Student.all
+   @students = Student.where(:active => true).order(:list_order)
    respond_with (@students)
   end
 
