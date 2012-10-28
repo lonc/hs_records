@@ -12,6 +12,14 @@
   <% end %>
 
   <div class="field">
+    <%= f.label :active %><br />
+    <%= f.check_box :active %>
+  </div>
+  <div class="field">
+    <%= f.label :"List Order" %><br />
+    <%= f.text_field :list_order %>
+  </div>
+  <div class="field">
     <%= f.label :name %><br />
     <%= f.text_field :name %>
   </div>

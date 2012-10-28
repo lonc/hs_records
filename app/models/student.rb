@@ -1,5 +1,5 @@
 class Student < ActiveRecord::Base
-   attr_accessible :name, :email, :parent, :phone_h, :phone_c, :phone_w, :address, :city, :state, :zip, :birthdate
+   attr_accessible :name, :email, :parent, :phone_h, :phone_c, :phone_w, :address, :city, :state, :zip, :birthdate, :active, :list_order
    validates :name, :presence => true
    validates :email, :presence => true
    validates :parent, :presence => true
