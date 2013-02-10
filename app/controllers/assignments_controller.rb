@@ -125,6 +125,8 @@ class AssignmentsController < ApplicationController
     if params.has_key?(:return_subject)
       @subject = Subject.find(params[:return_subject])
     end
+    session[:return_to] = request.referer
+
     @assignment = Assignment.find(params[:id])
     @assignment.destroy
 
@@ -132,7 +134,7 @@ class AssignmentsController < ApplicationController
         if @subject
           format.html { redirect_to @subject }
         else
-          format.html { redirect_to assignments_url }
+          format.html { redirect_to session[:return_to] }
         end
       format.json { head :no_content }
     end

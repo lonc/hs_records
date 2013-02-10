@@ -159,9 +159,9 @@ class StudentsController < ApplicationController
   def update_assigned
     respond_to do |format|
       if Assignment.upd_assign @@assignment_list
-        format.html { redirect_to students_url, :notice => 'Assignments were marked as assigned.' }
+        format.html { redirect_to students_select_daily_url, :notice => 'Assignments were marked as assigned.' }
       else
-        format.html { redirect_to students_url, :notice => 'WARNING:: NO ASSIGNMENTS WERE MARKED AS ASSIGNED.' }
+        format.html { redirect_to students_select_daily_url, :notice => 'WARNING:: NO ASSIGNMENTS WERE MARKED AS ASSIGNED.' }
       end
     end
   end
