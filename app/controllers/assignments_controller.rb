@@ -28,16 +28,19 @@ class AssignmentsController < ApplicationController
     @notes1 = Array.new
     @notes2 = Array.new
     date_params = params[:date]
-    @tmp = DateTime.new(date_params["selected(1i)"].to_i, date_params["selected(2i)"].to_i, date_params["selected(3i)"].to_i)
-    @date = @tmp.to_date
-    @t1 = Assignment.where("date_assigned = ? and watchfor != ?", @date, '')
+    @tmp = DateTime.new(date_params["start_date(1i)"].to_i, date_params["start_date(2i)"].to_i, date_params["start_date(3i)"].to_i)
+    @first_date = @tmp.to_date
+    @tmp = DateTime.new(date_params["end_date(1i)"].to_i, date_params["end_date(2i)"].to_i, date_params["end_date(3i)"].to_i)
+    @last_date = @tmp.to_date
+    @subs = Subject.where("base_id != id")
+    @t1 = Assignment.where("date_assigned >= ? and date_assigned <= ? and watchfor != ?", @first_date, @last_date, '').order(:date_assigned)
     @t1.each do |t|
       @sb = t.subject_id
       @subject = Subject.find(@sb).name
-      @hsh = {:subject => @subject, :comments => t.watchfor}
+      @hsh = {:subject => @subject, :date => t.date_assigned, :day => t.date_assigned.strftime("%A"), :comments => t.watchfor}
       @notes1.push(@hsh)
     end
-    @t2 = Assignment.where(:notify_by => @date)
+    @t2 = Assignment.where("notify_by >= ? and notify_by <= ?", @first_date, @last_date)
     @t2.each do |t|
       @sb = t.subject_id
       @subject = Subject.find(@sb).name
@@ -82,19 +85,6 @@ class AssignmentsController < ApplicationController
     end
   end
 
-  # POST /students_assign
-  # POST /students_assign.json
-  def add_assign
-
-    @assign = @subject.assignment.create(params[:assignment])
-
-    respond_to do |format|
-      if @assign.save
-        format.html # _new_assign.html.erb
-        format.json { render :json => @assign }
-        end
-     end
-  end
 
   # PUT /assignments/1
   # PUT /assignments/1.json
@@ -118,6 +108,23 @@ class AssignmentsController < ApplicationController
       end
     end
   end
+
+  # PUT /assignments/1
+  # PUT /assignments/1.json
+  def insert
+    @assignment = Assignment.find(params[:id])
+    logger.debug "Assignment::insert-> params = #{params.inspect}"
+    respond_to do |format|
+      if @assignment.insert_assign(params[:new_assign])
+        format.html { redirect_to :back, :notice => 'Assignment was successfully created.' }
+        format.json { render :json => @assignment, :status => :created, :location => @assignment }
+      else
+        format.html { redirect_to :back, :notice => 'WARNING:: Assignment was NOT created!!!' }
+        format.json { render :json => @assignment.errors, :status => :unprocessable_entity }
+      end
+    end
+  end
+              
 
   # DELETE /assignments/1
   # DELETE /assignments/1.json

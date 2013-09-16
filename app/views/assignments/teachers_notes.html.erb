@@ -9,6 +9,8 @@
 
 <% @notes1.each do |note| %>
 <p>
+  <b><%= note[:date] %>:</b>
+  <b><%= note[:day] %> =>  </b>
   <b><%= note[:subject] %>--</b>
   <%= note[:comments] %>
 </p>
@@ -22,10 +24,7 @@
   <b>Projected Date:</b> <%= note[:date] %>
 </p>
 <p>
-  <b><%= note[:subject] %></b>
-</p>
-<p>
-  <b>Materials:</b>
+  <b><%= note[:subject] %>: -- </b>
   <%= note[:materials] %>
 </p>
 <% end %>

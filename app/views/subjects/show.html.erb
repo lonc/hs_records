@@ -8,7 +8,7 @@
 </p>
 
 
-<%= render :partial => "assignments/assignments", :collection => @assignments, :locals => { :return_subject => @subject } %>
+<%= render :partial => "assignments/assignments", :collection => @assignments, :locals => { :return_subject => @subject, :new_assign => @new_assign } %>
 
 
 <%= form_for([@subject, @new_assign]) do |f| %>
@@ -16,7 +16,7 @@
     <%= f.hidden_field :subject_id, :value => @subject.id %>
   </div>
   <div class="field">
-    Assignment         : <%= f.text_field :assignment %>
+    Assignment         : <%= f.text_field :assignment, :tabindex => 1 %>
   </div>
   <div class="field">
     Projected Date     : <%= @adate.strftime("%^A") %> <%= f.date_select :date_assigned, :start_year => Time.now.year, :end_year => Time.now.year + 1, :use_short_month => true, :default => @adate %>

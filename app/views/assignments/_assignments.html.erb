@@ -9,6 +9,7 @@
     <td> -- MR </td>
     <td><%= assignments.materialsrequired %></td>
     <td><%= assignments.notify_by %></td>
+    <td><%= link_to 'Insert Before', controller: "assignments", action: "insert", :return_subject => params[:return_subject], :new_assign => params[:new_assign] %></td>
     <td><%= link_to 'Edit', edit_assignment_path(assignments, :return_subject => return_subject ) %></td>
     <td><%= link_to 'Destroy', assignments, :confirm => 'Are you sure?', :method => :delete, :return_subject => params[:return_subject] %></td>
   </tr>

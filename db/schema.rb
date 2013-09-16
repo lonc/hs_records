@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121028212405) do
+ActiveRecord::Schema.define(:version => 20130811192012) do
 
   create_table "assignments", :force => true do |t|
     t.string   "assignment",                           :null => false
@@ -25,7 +25,10 @@ ActiveRecord::Schema.define(:version => 20121028212405) do
     t.date     "notify_by"
     t.boolean  "assigned",          :default => false
     t.boolean  "studentupdate",     :default => false
+    t.integer  "sequence_id"
   end
+
+  add_index "assignments", ["subject_id", "sequence_id"], :name => "index_assignments_on_subject_id_and_sequence_id"
 
   create_table "notes", :force => true do |t|
     t.text     "jot"
@@ -76,6 +79,7 @@ ActiveRecord::Schema.define(:version => 20121028212405) do
     t.boolean  "graded",            :default => false
     t.boolean  "repeating",         :default => false
     t.boolean  "studentupdate",     :default => false
+    t.binary   "copy_from_master"
   end
 
 end

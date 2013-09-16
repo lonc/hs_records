@@ -4,10 +4,15 @@ HomeSchool::Application.routes.draw do
   match 'students/daily_list', :to => 'students#daily_list'
   match 'students/update_assigned', :to => 'students#update_assigned'
   match 'assignments/teachers_notes', :to => 'assignments#teachers_notes'
+  match 'assignments/:id', :to => 'assignments#insert', :via => :post
 
   resources :notes
 
-  resources :assignments 
+  resources :assignments do
+    member do
+      post 'insert'
+    end
+  end        
 
   resources :subjects do
     member do
