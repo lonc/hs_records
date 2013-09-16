@@ -9,77 +9,78 @@ class Subject < ActiveRecord::Base
    validates_associated :assignments
 
    def get_next_assignment_date 
-     @tmp = self.assignments.select("date_assigned").last
+     @tmp = self.assignments.last
      if @tmp
        @last_date = @tmp.date_assigned
+     else
+       @last_date = nil
      end
      if @last_date == nil
-       @next_date = Time.local(2012,2,29) 
-     else
-       if @last_date.monday?
-         if self.AssignOnTuesday == '1'
-          @next_date = @last_date + 1
-         elsif self.AssignOnWednesday == '1'
-          @next_date = @last_date + 2  
-         elsif self.AssignOnThursday == '1'
-          @next_date = @last_date + 3  
-         elsif self.AssignOnFriday == '1'
-          @next_date = @last_date + 4  
-         else
-          @next_date = @last_date + 7  
-         end
-       elsif @last_date.tuesday?
-         if self.AssignOnWednesday == '1'
-          @next_date = @last_date + 1
-         elsif self.AssignOnThursday == '1'
-          @next_date = @last_date + 2  
-         elsif self.AssignOnFriday == '1'
-          @next_date = @last_date + 3  
-         elsif self.AssignOnMonday == '1'
-          @next_date = @last_date + 6  
-         else
-          @next_date = @last_date + 7  
-         end
-       elsif @last_date.wednesday?
-         if self.AssignOnThursday == '1'
-          @next_date = @last_date + 1
-         elsif self.AssignOnFriday == '1'
-          @next_date = @last_date + 2  
-         elsif self.AssignOnMonday == '1'
-          @next_date = @last_date + 5  
-         elsif self.AssignOnTuesday == '1'
-          @next_date = @last_date + 6  
-         else
-          @next_date = @last_date + 7  
-         end
-       elsif @last_date.thursday?
-         if self.AssignOnFriday == '1'
-          @next_date = @last_date + 1
-         elsif self.AssignOnMonday == '1'
-          @next_date = @last_date + 4  
-         elsif self.AssignOnTuesday == '1'
-          @next_date = @last_date + 5  
-         elsif self.AssignOnWednesday == '1'
-          @next_date = @last_date + 6  
-         else
-          @next_date = @last_date + 7  
-         end
-       elsif @last_date.friday?
-         if self.AssignOnMonday == '1'
-          @next_date = @last_date + 3
-         elsif self.AssignOnTuesday == '1'
-          @next_date = @last_date + 4  
-         elsif self.AssignOnWednesday == '1'
-          @next_date = @last_date + 5  
-         elsif self.AssignOnThursday == '1'
-          @next_date = @last_date + 6  
-         else
-          @next_date = @last_date + 7  
-         end
-         @next_date = @next_date.to_time
+       @last_date = Time.local(2013,9,13).to_date
+     end
+     if @last_date.monday?
+       if self.AssignOnTuesday == '1'
+        @next_date = @last_date + 1
+       elsif self.AssignOnWednesday == '1'
+        @next_date = @last_date + 2  
+       elsif self.AssignOnThursday == '1'
+        @next_date = @last_date + 3  
+       elsif self.AssignOnFriday == '1'
+        @next_date = @last_date + 4  
        else
-        @next_date = Time.local(2012,2,29) 
+        @next_date = @last_date + 7  
        end
+     elsif @last_date.tuesday?
+       if self.AssignOnWednesday == '1'
+        @next_date = @last_date + 1
+       elsif self.AssignOnThursday == '1'
+        @next_date = @last_date + 2  
+       elsif self.AssignOnFriday == '1'
+        @next_date = @last_date + 3  
+       elsif self.AssignOnMonday == '1'
+        @next_date = @last_date + 6  
+       else
+        @next_date = @last_date + 7  
+       end
+     elsif @last_date.wednesday?
+       if self.AssignOnThursday == '1'
+        @next_date = @last_date + 1
+       elsif self.AssignOnFriday == '1'
+        @next_date = @last_date + 2  
+       elsif self.AssignOnMonday == '1'
+        @next_date = @last_date + 5  
+       elsif self.AssignOnTuesday == '1'
+        @next_date = @last_date + 6  
+       else
+        @next_date = @last_date + 7  
+       end
+     elsif @last_date.thursday?
+       if self.AssignOnFriday == '1'
+        @next_date = @last_date + 1
+       elsif self.AssignOnMonday == '1'
+        @next_date = @last_date + 4  
+       elsif self.AssignOnTuesday == '1'
+        @next_date = @last_date + 5  
+       elsif self.AssignOnWednesday == '1'
+        @next_date = @last_date + 6  
+       else
+        @next_date = @last_date + 7  
+       end
+     elsif @last_date.friday?
+       if self.AssignOnMonday == '1'
+        @next_date = @last_date + 3
+       elsif self.AssignOnTuesday == '1'
+        @next_date = @last_date + 4  
+       elsif self.AssignOnWednesday == '1'
+        @next_date = @last_date + 5  
+       elsif self.AssignOnThursday == '1'
+        @next_date = @last_date + 6  
+       else
+        @next_date = @last_date + 7  
+       end
+       @next_date = @next_date.to_time
+     else
+      @next_date = Time.local(2013,9,16).to_date 
      end
      return @next_date
    end
@@ -106,5 +107,4 @@ class Subject < ActiveRecord::Base
       new_assignment.update_attributes(subject_h)
     end
   end
-
 end
